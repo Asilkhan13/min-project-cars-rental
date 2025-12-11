@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ car }} - Cars Khan</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        .navbar { box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .hero-detail { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px 0; }
+        .car-image { border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); max-height: 500px; object-fit: cover; }
+        .price-big { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); color: white; padding: 20px; border-radius: 10px; text-align: center; }
+        .price-big h3 { font-size: 2.5rem; margin: 0; }
+        .specs-list { background: #f8f9fa; padding: 30px; border-radius: 10px; }
+        .spec-item { padding: 15px 0; border-bottom: 1px solid #dee2e6; }
+        .spec-item:last-child { border-bottom: none; }
+        .spec-label { font-weight: bold; color: #667eea; }
+        .btn-primary { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; }
+        .btn-primary:hover { background: linear-gradient(135deg, #764ba2 0%, #667eea 100%); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+        .gallery-thumbs { display: flex; gap: 10px; margin-top: 15px; }
+        .gallery-thumbs img { width: 80px; height: 80px; object-fit: cover; border-radius: 5px; cursor: pointer; opacity: 0.7; transition: 0.3s; }
+        .gallery-thumbs img:hover { opacity: 1; }
+        footer { background: #1a1a1a; color: white; padding: 40px 0; margin-top: 50px; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="/">
+                <i class="fas fa-car"></i> Cars Khan
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="/">Главная</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/cars/">Каталог</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/about/">О нас</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero-detail">
+        <div class="container">
+            <h1><i class="fas fa-car-side"></i> {{ car.brand }} {{ car.model }}</h1>
+            <p class="lead">{{ car.year }} год выпуска</p>
+        </div>
+    </div>
+
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-md-6">
+                {% comment %} --- КАРТИНКИ ИЗ media/cars/ --- {% endcomment %}
+                {% if car.brand == "Audi" and car.model == "A4" %}
+                <img src="/media/cars/Audi_A4.jpg" class="car-image w-100" alt="Audi A4" id="mainImage">
+                {% elif car.brand == "BMW" and car.model == "3 Series" %}
+                <img src="/media/cars/bmw_3_series.jpg" class="car-image w-100" alt="BMW 3 Series" id="mainImage">
+                {% elif car.brand == "Chevrolet" and car.model == "Aveo" %}
+                <img src="/media/cars/Chevrolet_Aveo.jpg" class="car-image w-100" alt="Chevrolet Aveo" id="mainImage">
+                {% elif car.brand == "Honda" and car.model == "Civic" %}
+                <img src="/media/cars/honda_civic.jpg" class="car-image w-100" alt="Honda Civic" id="mainImage">
+                {% elif car.brand == "Hyundai" and car.model == "Tucson" %}
+                <img src="/media/cars/hyundai_tucson.jpg" class="car-image w-100" alt="Hyundai Tucson" id="mainImage">
+                {% elif car.brand == "Kia" and car.model == "Sportage" %}
+                <img src="/media/cars/Kia_Sportage.jpg" class="car-image w-100" alt="Kia Sportage" id="mainImage">
+                {% elif car.brand == "Lexus" and car.model == "RX" %}
+                <img src="/media/cars/Lexus_RX.jpg" class="car-image w-100" alt="Lexus RX" id="mainImage">
+                {% elif car.brand == "Mazda" and car.model == "CX-5" %}
+                <img src="/media/cars/Mazda_CX_5.jpg" class="car-image w-100" alt="Mazda CX-5" id="mainImage">
+                {% elif car.brand == "Mercedes-Benz" and car.model == "C-Class" %}
+                <img src="/media/cars/Mercedes_Benz_C_Class.jpg" class="car-image w-100" alt="Mercedes-Benz C-Class" id="mainImage">
+                {% elif car.brand == "Nissan" and car.model == "Qashqai" %}
+                <img src="/media/cars/Nissan_Qashqai.jpg" class="car-image w-100" alt="Nissan Qashqai" id="mainImage">
+                {% elif car.brand == "Toyota" and car.model == "Camry" %}
+                <img src="/media/cars/toyota_camry.jpg" class="car-image w-100" alt="Toyota Camry" id="mainImage">
+                {% elif car.brand == "Volkswagen" and car.model == "Golf" %}
+                <img src="/media/cars/Volkswagen_Golf.jpg" class="car-image w-100" alt="Volkswagen Golf" id="mainImage">
+                {% else %}
+                <div class="bg-secondary rounded d-flex align-items-center justify-content-center" style="height: 400px;">
+                    <div class="text-center">
+                        <i class="fas fa-car fa-10x text-white opacity-25"></i>
+                        <p class="text-white mt-3">Фото не загружено</p>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="col-md-6">
+                <div class="price-big mb-4">
+                    <h3>{{ car.price_per_day }}₸</h3>
+                    <p class="mb-0">в день</p>
+                </div>
+
+                <div class="specs-list mb-4">
+                    <div class="spec-item">
+                        <span class="spec-label"><i class="fas fa-calendar"></i> Год выпуска:</span>
+                        <span>{{ car.year }}</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label"><i class="fas fa-cog"></i> Коробка передач:</span>
+                        <span>{{ car.get_transmission_display }}</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label"><i class="fas fa-users"></i> Количество мест:</span>
+                        <span>{{ car.seats }} человек</span>
+                    </div>
+                    <div class="spec-item">
+                        <span class="spec-label"><i class="fas fa-check-circle"></i> Статус:</span>
+                        {% if car.available %}
+                        <span><span class="badge bg-success">✓ Доступна</span></span>
+                        {% else %}
+                        <span><span class="badge bg-danger">✗ Недоступна</span></span>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <h5 class="mb-3">Описание</h5>
+                <p class="text-muted">{{ car.description }}</p>
+
+                <div class="mt-4">
+                    {% if car.available %}
+                    <button class="btn btn-primary btn-lg w-100 mb-2" data-bs-toggle="modal" data-bs-target="#rentalModal">
+                        <i class="fas fa-star"></i> Зарезервировать сейчас
+                    </button>
+                    {% else %}
+                    <button class="btn btn-secondary btn-lg w-100 mb-2" disabled>
+                        <i class="fas fa-lock"></i> Недоступна для аренды
+                    </button>
+                    {% endif %}
+                    <a href="/cars/" class="btn btn-outline-primary btn-lg w-100">
+                        <i class="fas fa-arrow-left"></i> Вернуться в каталог
+                    </a>
+                </div>
+
+                <div class="alert alert-info mt-4">
+                    <i class="fas fa-info-circle"></i>
+                    <strong>Страховка включена</strong> в стоимость аренды
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- МОДАЛЬНОЕ ОКНО -->
+    <div class="modal fade" id="rentalModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">
+                        <i class="fas fa-calendar-check"></i> Бронирование: {{ car.brand }} {{ car.model }}
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="lead">Спасибо за интерес к нашему автомобилю!</p>
+                    <p>Для бронирования свяжитесь с нами:</p>
+                    
+                    <div class="list-group">
+                        <a href="tel:+77001234567" class="list-group-item list-group-item-action">
+                            <i class="fas fa-phone text-success"></i> 
+                            <strong>Позвоните нам</strong><br>
+                            +7 (700) 123-45-67
+                        </a>
+                        <a href="https://wa.me/77001234567" target="_blank" class="list-group-item list-group-item-action">
+                            <i class="fab fa-whatsapp text-success"></i> 
+                            <strong>WhatsApp</strong><br>
+                            Напишите нам в мессенджер
+                        </a>
+                        <a href="mailto:info@carskhan.kz" class="list-group-item list-group-item-action">
+                            <i class="fas fa-envelope text-primary"></i> 
+                            <strong>Email</strong><br>
+                            info@carskhan.kz
+                        </a>
+                    </div>
+
+                    <div class="alert alert-warning mt-3">
+                        <i class="fas fa-clock"></i> 
+                        Режим работы: 8:00 - 22:00 ежедневно
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5>Cars Khan</h5>
+                    <p>Лучший сервис аренды автомобилей в Алматы</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Контакты</h5>
+                    <p><i class="fas fa-phone"></i> +7 (700) 123-45-67</p>
+                    <p><i class="fas fa-envelope"></i> info@carskhan.kz</p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Следите за нами</h5>
+                    <a href="#" class="text-white me-2"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="text-white me-2"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="text-white"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            <hr class="bg-white-50">
+            <p class="text-center text-white-50">&copy; 2025 Cars Khan. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

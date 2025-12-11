@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="alert alert-success text-center">
+        <h1>✓ Заказ успешно создан!</h1>
+        <p class="lead">Спасибо за заказ. Мы свяжемся с вами в ближайшее время.</p>
+        <a href="{% url 'car_list' %}" class="btn btn-primary btn-lg mt-3">Вернуться в каталог</a>
+    </div>
+</div>
+{% endblock %}
